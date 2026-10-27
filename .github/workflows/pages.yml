@@ -1,0 +1,56 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy project page
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate version feed
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          with open('docs/version.json', encoding='utf-8') as f:
+              data = json.load(f)
+          for key in ('version', 'url'):
+              if not data.get(key):
+                  sys.exit(f"docs/version.json is missing '{key}'")
+          parts = data['version'].split('.')
+          if len(parts) != 3 or not all(p.isdigit() for p in parts):
+              sys.exit(f"docs/version.json version '{data['version']}' is not semver")
+          print('version feed OK:', data['version'])
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

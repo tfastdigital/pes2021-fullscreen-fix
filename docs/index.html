@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PES 2021 Fullscreen Fix - TFast Digital</title>
+    <meta
+      name="description"
+      content="Fix eFootball PES 2021 dropping to the taskbar and running on the wrong GPU on Windows 10 and 11. Free, open source, MIT licensed."
+    />
+    <meta name="theme-color" content="#1f2126" />
+    <link
+      rel="canonical"
+      href="https://tfastdigital.github.io/pes2021-fullscreen-fix/"
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PES 2021 Fullscreen Fix" />
+    <meta
+      property="og:description"
+      content="Fix PES 2021 dropping to the taskbar and using the wrong GPU on Windows 10 and 11."
+    />
+    <meta
+      property="og:url"
+      content="https://tfastdigital.github.io/pes2021-fullscreen-fix/"
+    />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="./">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>PES 2021 Fullscreen Fix</span>
+        </a>
+        <nav class="site-nav">
+          <a href="#download">Download</a>
+          <a href="#features">Features</a>
+          <a href="#usage">Usage</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+          <a href="https://github.com/tfastdigital/pes2021-fullscreen-fix"
+            >Source</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="wrap">
+          <h1>PES 2021 stops dropping to the taskbar</h1>
+          <p class="lead">
+            A small Windows tool that fixes the two things that break eFootball
+            PES 2021 in fullscreen: the game minimising itself, and the game
+            running on the wrong graphics processor. Applies the correct
+            settings, verifies them, and can undo everything with one button.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest"
+            >
+              Download for Windows
+            </a>
+            <a
+              class="btn"
+              href="https://github.com/tfastdigital/pes2021-fullscreen-fix"
+            >
+              View source
+            </a>
+          </div>
+
+          <p class="meta">
+            Version <strong id="latest-version">1.1.0</strong> &middot; Windows
+            10 and 11 &middot; MIT licence &middot; no installer, no telemetry
+          </p>
+        </div>
+      </div>
+
+      <section id="features">
+        <div class="wrap">
+          <h2>What it fixes</h2>
+          <div class="grid grid-2">
+            <div class="card">
+              <h4>Starts minimised</h4>
+              <p>
+                Writes Screen Mode and native resolution into the game's own
+                settings file, so the mode switch succeeds even with display
+                scaling above 100 percent.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Drops to the taskbar mid-match</h4>
+              <p>
+                Raises Windows' foreground lock so background programs are
+                refused when they try to take focus, and restores the window in
+                about a second if one gets through.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Wrong graphics processor</h4>
+              <p>
+                Enumerates the GPUs through DXGI, picks the discrete one, then
+                verifies the choice against live GPU counters so you can see
+                which processor is really rendering.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Overlays stealing focus</h4>
+              <p>
+                Closes known offenders while you play and re-checks, so
+                recorders that restart themselves are closed again.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-3" style="margin-top: 16px">
+            <div class="card">
+              <h4>Reversible</h4>
+              <p>
+                Original values are saved first. One button puts everything
+                back.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Portable</h4>
+              <p>
+                A single executable. Nothing installed, no services, no
+                machine-wide changes.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Transparent</h4>
+              <p>
+                The whole fix is a readable PowerShell script. The GUI is a thin
+                front end.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="download">
+        <div class="wrap">
+          <h2>Download</h2>
+          <p>
+            Grab <code>PES 2021 TFast Fix.exe</code> from the latest release and
+            put it in the folder that contains <code>PES2021.exe</code>. Then
+            run it and press <strong>Play PES 2021</strong>.
+          </p>
+
+          <pre><code># verify your download (hash is published with each release)
+Get-FileHash "PES 2021 TFast Fix.exe" -Algorithm SHA256</code></pre>
+
+          <div class="note">
+            <strong>Requirements:</strong> Windows 10 or 11, 64-bit, and .NET
+            Framework 4.x, which is present on every supported Windows version.
+            No administrator rights are needed for normal use.
+          </div>
+
+          <p>
+            <a
+              class="btn btn-primary"
+              href="https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest"
+              >Latest release</a
+            >
+            &nbsp;
+            <a
+              class="btn"
+              href="https://github.com/tfastdigital/pes2021-fullscreen-fix/releases"
+              >All releases</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <section id="usage">
+        <div class="wrap">
+          <h2>Usage</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Button</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Play PES 2021</td>
+                <td>
+                  Apply the fix, start the game, keep it fullscreen. Enter does
+                  the same.
+                </td>
+              </tr>
+              <tr>
+                <td>Install fix</td>
+                <td>
+                  Also start the watchdog with Windows, so any shortcut works.
+                </td>
+              </tr>
+              <tr>
+                <td>High-performance GPU</td>
+                <td>Detect the GPUs, force the discrete one, verify it.</td>
+              </tr>
+              <tr>
+                <td>Diagnose focus</td>
+                <td>List the programs that take the foreground.</td>
+              </tr>
+              <tr>
+                <td>Close overlays</td>
+                <td>Close overlay processes now.</td>
+              </tr>
+              <tr>
+                <td>Restore all</td>
+                <td>Undo every change, with confirmation.</td>
+              </tr>
+              <tr>
+                <td>Open game folder</td>
+                <td>Open the install folder in Explorer.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Command line</h3>
+          <pre><code>PES 2021 TFast Fix.exe -Action Play
+PES 2021 TFast Fix.exe -Action Fix -InstallStartup
+PES 2021 TFast Fix.exe -Action Gpu
+PES 2021 TFast Fix.exe -Action Diagnose -DiagnoseSeconds 120
+PES 2021 TFast Fix.exe -Action Overlays
+PES 2021 TFast Fix.exe -Action Restore
+PES 2021 TFast Fix.exe -Action Fix -GameDir "D:\games\PES2021"</code></pre>
+
+          <h3>Engine only, no GUI</h3>
+          <pre><code>git clone https://github.com/tfastdigital/pes2021-fullscreen-fix.git
+cd pes2021-fullscreen-fix
+powershell -ExecutionPolicy Bypass -File .\src\PES2021-Fullscreen.ps1 -Action Fix</code></pre>
+        </div>
+      </section>
+
+      <section id="troubleshooting">
+        <div class="wrap">
+          <h2>Troubleshooting</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Symptom</th>
+                <th>What to do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Still drops to the taskbar</td>
+                <td>
+                  Run <em>Diagnose focus</em>, then add the named program with
+                  <code>-ExtraOverlay name.exe</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>Image looks blurry</td>
+                <td>
+                  Set display scaling to 100 percent, or keep the high-DPI flag
+                  and run at native resolution.
+                </td>
+              </tr>
+              <tr>
+                <td>Taskbar visible over the game</td>
+                <td>
+                  Use Fullscreen rather than <code>-Mode Borderless</code>.
+                  Windows 11 keeps the taskbar above borderless windows.
+                </td>
+              </tr>
+              <tr>
+                <td>Something is broken</td>
+                <td>
+                  Press <em>Restore all</em>, then open an issue with the log
+                  from <code>%TEMP%\PES2021Fullscreen.log</code>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note warn">
+            <strong>Update check:</strong> the app reads
+            <code>version.json</code> from this site once per launch and shows a
+            link if a newer build exists. Nothing is downloaded or run
+            automatically. Disable it with <code>-NoUpdateCheck</code>.
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="wrap">
+          <h2>About</h2>
+          <p>
+            Built by <a href="https://tfastdigital.com">TFast Digital</a>.
+            Source code, issue tracker and releases live on
+            <a href="https://github.com/tfastdigital/pes2021-fullscreen-fix"
+              >GitHub</a
+            >.
+          </p>
+
+          <div class="social">
+            <a href="https://t.me/tfasthub" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#229ED9" />
+                <path
+                  d="M5 11.6l13.2-5.1c.6-.2 1.1.1.9.9l-2.2 10.5c-.2.8-.7 1-1.3.6l-3.5-2.6-1.7 1.6c-.2.2-.4.4-.8.4l.2-3.5 6.3-5.7c.3-.3-.1-.4-.4-.2l-7.8 4.9-2.7-.9c-.6-.2-.6-.6-.1-.9z"
+                  fill="#fff"
+                />
+              </svg>
+              Telegram
+            </a>
+            <a
+              href="https://whatsapp.com/channel/0029VaAYznPK5cDIXJa9nW1a"
+              aria-label="WhatsApp channel"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#25D366" />
+                <path
+                  d="M8.2 7.2c-.6-.1-1.1.2-1.4.7-.4.6-.6 1.4.1 2.6.8 1.4 2 2.9 3.6 3.9 1.5 1 2.6 1.2 3.3 1.1.6-.1 1.2-.6 1.4-1.2.1-.4 0-.7-.2-.9l-1.5-1c-.2-.1-.4-.1-.6.1l-.6.7c-.1.2-.3.2-.5.1-.7-.3-1.3-.7-1.9-1.3-.5-.6-.9-1.2-1.1-1.9-.1-.2 0-.4.1-.5l.7-.6c.2-.2.2-.4.1-.6l-1-1.5c-.1-.2-.3-.2-.3-.2z"
+                  fill="#fff"
+                />
+              </svg>
+              WhatsApp
+            </a>
+            <a href="https://www.tiktok.com/@tfasthub" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="5"
+                  fill="#101114"
+                  stroke="#33363f"
+                />
+                <path
+                  d="M12.6 5.5c.3 1.5 1.2 2.4 2.8 2.6v1.9c-.9 0-1.7-.2-2.4-.6v4.3c0 2.6-2 4.4-4.4 4.4-2.2 0-4-1.7-4-3.9 0-2.4 1.9-4.1 4.4-4v2c-.2 0-.4-.1-.6-.1-1.1 0-1.9.9-1.9 2 0 1.1.9 1.9 2 1.9 1.2 0 2-.8 2-2.1V5.5h2.1z"
+                  fill="#fff"
+                />
+                <path
+                  d="M12.2 5.5c.3 1.5 1.2 2.4 2.8 2.6v1.9"
+                  stroke="#25F4EE"
+                  stroke-width="1.2"
+                  fill="none"
+                />
+                <path
+                  d="M13 5.5c.3 1.5 1.2 2.4 2.8 2.6v1.9"
+                  stroke="#FE2C55"
+                  stroke-width="1.2"
+                  fill="none"
+                />
+              </svg>
+              TikTok
+            </a>
+            <a
+              href="https://www.youtube.com/@TfastDigital"
+              aria-label="YouTube"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect
+                  x="1"
+                  y="4.5"
+                  width="22"
+                  height="15"
+                  rx="4.2"
+                  fill="#FF0000"
+                />
+                <path d="M10 8.8l6 3.2-6 3.2z" fill="#fff" />
+              </svg>
+              YouTube
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          TFast Digital &middot;
+          <a href="https://tfastdigital.com">tfastdigital.com</a> &middot; MIT
+          licence
+        </p>
+        <p class="disclaimer">
+          Not affiliated with, endorsed by or sponsored by Konami Digital
+          Entertainment. eFootball PES 2021 and its assets are the property of
+          Konami Digital Entertainment. This project ships no game files and no
+          copyrighted game content. It only modifies the user's own
+          configuration files and per-user Windows settings.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Show the version actually published in the feed, and stay quiet if unavailable.
+      (function () {
+        fetch("version.json", { cache: "no-store" })
+          .then(function (r) {
+            return r.ok ? r.json() : null;
+          })
+          .then(function (data) {
+            if (!data || !data.version) return;
+            var el = document.getElementById("latest-version");
+            if (el) el.textContent = data.version;
+          })
+          .catch(function () {
+            /* keep the static fallback */
+          });
+      })();
+    </script>
+  </body>
+</html>

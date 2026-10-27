@@ -1,0 +1,43 @@
+name: Feature request
+description: Suggest a fix or an option that would help
+title: "[feat] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the problem first and the solution second. A concrete symptom is far more
+        useful than a general request.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you hitting?
+      placeholder: On my laptop the game switches GPUs when the charger is connected, so the fix works only on battery.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to do?
+    validations:
+      required: true
+
+  - type: input
+    id: gpu
+    attributes:
+      label: Graphics processors and Windows build
+      placeholder: AMD Radeon 780M + RX 7600M XT, Windows 11 24H2
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This can be done with per-user settings (no administrator rights)
+          required: false
+        - label: I am willing to test a build
+          required: false

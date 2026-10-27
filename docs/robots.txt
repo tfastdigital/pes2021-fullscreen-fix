@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tfastdigital.github.io/pes2021-fullscreen-fix/sitemap.xml

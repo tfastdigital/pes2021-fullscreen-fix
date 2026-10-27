@@ -1,0 +1,93 @@
+name: Bug report
+description: Report a fullscreen, focus, overlay or GPU problem
+title: "[bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Most problems depend on the exact machine, so the details below
+        decide whether this can be reproduced at all.
+
+        Before submitting: run **Restore all**, then apply the fix again, and confirm the problem
+        still happens.
+
+  - type: input
+    id: version
+    attributes:
+      label: Tool version
+      description: Shown in the window header and in the exe's Properties > Details.
+      placeholder: 1.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: Main symptom
+      options:
+        - Starts minimised / on the taskbar
+        - Drops to the taskbar during play
+        - Runs on the wrong GPU
+        - Game is blurry or scaled wrongly
+        - Taskbar visible over the game
+        - Overlay still running after Close overlays
+        - Restore did not undo a change
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run the tool, press Play PES 2021
+        2. Wait for the main menu
+        3. Press the Windows key, then return to the game
+        4. The game stays minimised
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: input
+    id: gpu
+    attributes:
+      label: Graphics processors
+      description: Built-in and discrete GPU, with driver versions. Run `dxdiag` or use Task Manager.
+      placeholder: Intel UHD 630 + NVIDIA Quadro P1000, driver 32.0.15.7322
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version and display scaling
+      placeholder: Windows 11 25H2 (26200), 125% scaling, 1920x1080
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: |
+        Paste the contents of `%TEMP%\PES2021Fullscreen.log`. Attach or paste the output of
+        **Diagnose focus** if the game is losing focus.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Anything else
+      description: Overlay software installed, antivirus, other Windows tweaks.
+    validations:
+      required: false

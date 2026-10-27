@@ -1,0 +1,89 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build executable
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify PowerShell syntax
+        shell: pwsh
+        run: |
+          $errors = $null
+          $null = [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path ./src/PES2021-Fullscreen.ps1).Path, [ref]$null, [ref]$errors)
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error "line $($_.Extent.StartLineNumber): $($_.Message)" }
+            exit 1
+          }
+          Write-Host 'Engine syntax OK'
+
+      - name: Build GUI
+        shell: powershell
+        run: .\build\build-gui.ps1
+
+      - name: Smoke test (detection and restore, no game)
+        shell: powershell
+        run: |
+          $tmp = Join-Path $env:TEMP 'pes-ci'
+          New-Item -ItemType Directory -Path $tmp -Force | Out-Null
+          Set-Content -Path "$tmp\PES2021.exe" -Value ''
+          powershell -ExecutionPolicy Bypass -File .\src\PES2021-Fullscreen.ps1 -Action Gpu -GameDir $tmp
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+
+      - name: Compute checksum
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash 'build/PES 2021 TFast Fix.exe' -Algorithm SHA256).Hash
+          "SHA256=$hash" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          Write-Host "SHA256 $hash"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pes2021-fullscreen-fix
+          path: build/PES 2021 TFast Fix.exe
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
+          gh release create $tag 'build/PES 2021 TFast Fix.exe' `
+            --title "PES 2021 Fullscreen Fix $tag" `
+            --generate-notes `
+            --notes "SHA256: $env:SHA256"
+
+      - name: Sync version feed
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
+          $version = $tag -replace '^v', ''
+          $feed = Get-Content docs/version.json -Raw | ConvertFrom-Json
+          $feed.version = $version
+          $feed.date = (Get-Date -Format 'yyyy-MM-dd')
+          $feed.url = "https://github.com/${{ github.repository }}/releases/tag/$tag"
+          $feed.sha256 = $env:SHA256
+          $feed | ConvertTo-Json | Set-Content docs/version.json -Encoding utf8
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/version.json
+          git commit -m "chore: update version feed to $version" | Out-Null
+          git push origin HEAD:main
