@@ -37,9 +37,9 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $Version = $Version.TrimStart('v', 'V')
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw "'$Version' is not a semantic version (expected MAJOR.MINOR.PATCH)." }
 
-$gui    = Join-Path $repoRoot 'src\gui\TfastRunnerGui.cs'
+$gui = Join-Path $repoRoot 'src\gui\TfastRunnerGui.cs'
 $engine = Join-Path $repoRoot 'src\PES2021-Fullscreen.ps1'
-$feed   = Join-Path $repoRoot 'docs\version.json'
+$feed = Join-Path $repoRoot 'docs\version.json'
 
 foreach ($f in @($gui, $engine, $feed)) {
     if (-not (Test-Path -LiteralPath $f)) { throw "Missing file: $f" }
@@ -71,10 +71,10 @@ $engineText = Get-Content -LiteralPath $engine -Raw
 $feedData = Get-Content -LiteralPath $feed -Raw | ConvertFrom-Json
 
 $checks = @(
-    @{ Name = 'AssemblyVersion';     Ok = $guiText -match "AssemblyVersion\(`"$([regex]::Escape($Version))\.0`"\)" }
-    @{ Name = 'Brand.Version';       Ok = $guiText -match "Version\s*=\s*`"$([regex]::Escape($Version))`"" }
-    @{ Name = 'engine header';       Ok = $engineText -match "(?m)^\s*Version:\s*$([regex]::Escape($Version))\s*$" }
-    @{ Name = 'version.json';        Ok = $feedData.version -eq $Version }
+    @{ Name = 'AssemblyVersion'; Ok = $guiText -match "AssemblyVersion\(`"$([regex]::Escape($Version))\.0`"\)" }
+    @{ Name = 'Brand.Version'; Ok = $guiText -match "Version\s*=\s*`"$([regex]::Escape($Version))`"" }
+    @{ Name = 'engine header'; Ok = $engineText -match "(?m)^\s*Version:\s*$([regex]::Escape($Version))\s*$" }
+    @{ Name = 'version.json'; Ok = $feedData.version -eq $Version }
 )
 
 $failed = @($checks | Where-Object { -not $_.Ok })
