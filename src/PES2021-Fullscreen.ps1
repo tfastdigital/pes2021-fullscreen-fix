@@ -2,7 +2,7 @@
 <#
 .NOTES
     Version: 1.1.0
-    Project: https://github.com/tfastdigital6/pes2021-fullscreen-fix
+    Project: https://github.com/tfastdigital/pes2021-fullscreen-fix
     Licence: MIT
 
 .SYNOPSIS

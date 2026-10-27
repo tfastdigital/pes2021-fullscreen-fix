@@ -62,7 +62,7 @@ $data = Get-Content -LiteralPath $feed -Raw | ConvertFrom-Json
 $data.version = $Version
 $data.date = (Get-Date -Format 'yyyy-MM-dd')
 if ($Notes) { $data.notes = $Notes }
-$data.url = "https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/tag/v$Version"
+$data.url = "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v$Version"
 $data | ConvertTo-Json | Set-Content -LiteralPath $feed -Encoding utf8
 
 # ---- verify

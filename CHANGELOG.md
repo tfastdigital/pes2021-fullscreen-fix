@@ -47,6 +47,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Windows Forms front end with buttons, live log panel, progress indicator and stop button.
 - One-button restore of every change, including Game Bar, notification and antivirus state.
 
-[Unreleased]: https://github.com/tfastdigital6/pes2021-fullscreen-fix/compare/v1.1.0...HEAD
-[1.1.0]: https://github.com/tfastdigital6/pes2021-fullscreen-fix/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/tag/v1.0.0
+[Unreleased]: https://github.com/tfastdigital/pes2021-fullscreen-fix/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/tfastdigital/pes2021-fullscreen-fix/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v1.0.0

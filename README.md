@@ -1,10 +1,10 @@
 # PES 2021 Fullscreen Fix
 
-[![build](https://github.com/tfastdigital6/pes2021-fullscreen-fix/actions/workflows/build.yml/badge.svg)](https://github.com/tfastdigital6/pes2021-fullscreen-fix/actions/workflows/build.yml)
-[![release](https://img.shields.io/github/v/release/tfastdigital6/pes2021-fullscreen-fix?sort=semver)](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest)
-[![downloads](https://img.shields.io/github/downloads/tfastdigital6/pes2021-fullscreen-fix/total)](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases)
-[![licence](https://img.shields.io/github/license/tfastdigital6/pes2021-fullscreen-fix)](LICENSE)
-[![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6)](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest)
+[![build](https://github.com/tfastdigital/pes2021-fullscreen-fix/actions/workflows/build.yml/badge.svg)](https://github.com/tfastdigital/pes2021-fullscreen-fix/actions/workflows/build.yml)
+[![release](https://img.shields.io/github/v/release/tfastdigital/pes2021-fullscreen-fix?sort=semver)](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)
+[![downloads](https://img.shields.io/github/downloads/tfastdigital/pes2021-fullscreen-fix/total)](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases)
+[![licence](https://img.shields.io/github/license/tfastdigital/pes2021-fullscreen-fix)](LICENSE)
+[![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6)](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)
 
 Fixes the two things that stop **eFootball PES 2021 SEASON UPDATE** from staying fullscreen on
 modern Windows: the game dropping to the taskbar, and the game running on the wrong graphics
@@ -13,8 +13,8 @@ processor.
 No installer, no background services beyond an optional fullscreen watchdog, no telemetry, no
 network calls except an optional update check.
 
-**[Download the latest release](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest)** ·
-**[Project page](https://tfastdigital6.github.io/pes2021-fullscreen-fix/)**
+**[Download the latest release](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)** ·
+**[Project page](https://tfastdigital.github.io/pes2021-fullscreen-fix/)**
 
 ![Interface](docs/assets/screenshot.png)
 
@@ -67,7 +67,7 @@ Every change is reversible with one button. Original values are saved before any
 
 ## Usage
 
-Download `PES 2021 TFast Fix.exe` from [Releases](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest)
+Download `PES 2021 TFast Fix.exe` from [Releases](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)
 and place it next to `PES2021.exe`, then run it.
 
 | Button               | Action                                                                  |
@@ -95,7 +95,7 @@ PES 2021 TFast Fix.exe -Action Fix -GameDir "D:\games\PES2021"
 The engine can also be run directly, without the GUI:
 
 ```powershell
-git clone https://github.com/tfastdigital6/pes2021-fullscreen-fix.git
+git clone https://github.com/tfastdigital/pes2021-fullscreen-fix.git
 cd pes2021-fullscreen-fix
 powershell -ExecutionPolicy Bypass -File .\src\PES2021-Fullscreen.ps1 -Action Fix
 ```
@@ -105,7 +105,7 @@ Run `-Action Help` for the full option list, including `-Mode Borderless`, `-Gpu
 
 ## Update check
 
-The application checks `docs/version.json` on [GitHub Pages](https://tfastdigital6.github.io/pes2021-fullscreen-fix/)
+The application checks `docs/version.json` on [GitHub Pages](https://tfastdigital.github.io/pes2021-fullscreen-fix/)
 once per launch, in the background. If a newer version exists it shows a single line with a link to
 the release. Nothing is downloaded or executed automatically, and the check is skipped when you are
 offline. Section [Privacy](#privacy) covers exactly what is sent.
@@ -117,7 +117,7 @@ offline. Section [Privacy](#privacy) covers exactly what is sent.
 | Still drops to the taskbar         | Run `Diagnose focus`, then add the named program with `-ExtraOverlay name.exe`                                   |
 | Game looks blurry                  | Set display scaling to 100%, or keep `HIGHDPIAWARE` and use native resolution                                    |
 | Taskbar visible over the game      | Use Fullscreen, not `-Mode Borderless`; Windows 11 keeps the taskbar above borderless windows                    |
-| Update says a newer version exists | Download it from [Releases](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases) and replace the exe |
+| Update says a newer version exists | Download it from [Releases](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases) and replace the exe |
 | Something is broken                | `Restore all`, then reopen an issue with the log from `%TEMP%\PES2021Fullscreen.log`                             |
 
 ## Privacy
@@ -125,7 +125,7 @@ offline. Section [Privacy](#privacy) covers exactly what is sent.
 - No telemetry, no analytics, no crash reporting.
 - The update check requests one static JSON file from GitHub Pages. GitHub receives your IP address,
   as with any web request. No identifiers, no query parameters.
-- Disable it with `-NoUpdateCheck`, or by blocking `tfastdigital6.github.io`.
+- Disable it with `-NoUpdateCheck`, or by blocking `tfastdigital.github.io`.
 - Nothing is uploaded. Logs stay in `%TEMP%`.
 
 ## Project layout
@@ -146,7 +146,7 @@ The GUI embeds `PES2021-Fullscreen.ps1` as a resource and extracts it to
 ## Building
 
 ```powershell
-git clone https://github.com/tfastdigital6/pes2021-fullscreen-fix.git
+git clone https://github.com/tfastdigital/pes2021-fullscreen-fix.git
 cd pes2021-fullscreen-fix
 powershell -ExecutionPolicy Bypass -File .\build\build-gui.ps1
 ```
