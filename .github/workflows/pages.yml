@@ -32,8 +32,12 @@ jobs:
         run: |
           python3 - <<'PY'
           import json, sys
-          with open('docs/version.json', encoding='utf-8') as f:
-              data = json.load(f)
+          # utf-8-sig tolerates a BOM. The feed must never ship one, but failing the whole
+          # deploy over an invisible character is worse than reading through it.
+          raw = open('docs/version.json', 'rb').read()
+          if raw.startswith(b'\xef\xbb\xbf'):
+            print('::warning::docs/version.json starts with a UTF-8 BOM; rewrite it without one')
+          data = json.loads(raw.decode('utf-8-sig'))
           for key in ('version', 'url'):
               if not data.get(key):
                   sys.exit(f"docs/version.json is missing '{key}'")

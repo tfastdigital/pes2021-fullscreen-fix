@@ -63,7 +63,12 @@ $data.version = $Version
 $data.date = (Get-Date -Format 'yyyy-MM-dd')
 if ($Notes) { $data.notes = $Notes }
 $data.url = "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v$Version"
-$data | ConvertTo-Json | Set-Content -LiteralPath $feed -Encoding utf8
+
+# Write without a byte order mark. Windows PowerShell's `Set-Content -Encoding utf8` emits
+# one, and strict JSON readers (Python's json.load, several feed parsers) reject it, which
+# broke the Pages workflow validation.
+$json = $data | ConvertTo-Json
+[IO.File]::WriteAllText($feed, $json + "`n", (New-Object Text.UTF8Encoding($false)))
 
 # ---- asset cache tokens in the site pages
 # Image and stylesheet URLs carry ?v=<version>. A browser that once cached a 404 for an

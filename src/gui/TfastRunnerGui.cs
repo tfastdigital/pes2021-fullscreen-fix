@@ -364,6 +364,10 @@ namespace TFastDigital
 
             if (string.IsNullOrEmpty(json)) return result;
 
+            // Some editors and older PowerShell versions save JSON with a byte order mark.
+            // Strip it so field parsing is not thrown off by the invisible prefix.
+            json = json.TrimStart('\uFEFF');
+
             string latest = Field(json, "version");
             if (latest.Length == 0) return result;
 
