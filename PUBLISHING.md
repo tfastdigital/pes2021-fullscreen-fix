@@ -30,11 +30,11 @@ powershell -ExecutionPolicy Bypass -File .\build\publish.ps1 -Owner myorg -Repo 
 
 ## What happens after the push
 
-| Trigger | Result |
-| --- | --- |
-| Push to `main` | `build` workflow compiles the exe and checks the metadata |
-| Change under `docs/` | `pages` workflow publishes the project page |
-| Push of a `v*` tag | Release created with the exe attached, SHA-256 in the notes, `docs/version.json` updated |
+| Trigger              | Result                                                                                   |
+| -------------------- | ---------------------------------------------------------------------------------------- |
+| Push to `main`       | `build` workflow compiles the exe and checks the metadata                                |
+| Change under `docs/` | `pages` workflow publishes the project page                                              |
+| Push of a `v*` tag   | Release created with the exe attached, SHA-256 in the notes, `docs/version.json` updated |
 
 Watch the first run with:
 
@@ -44,12 +44,12 @@ Watch the first run with:
 
 ## Expected addresses
 
-| Purpose | Address |
-| --- | --- |
-| Repository | https://github.com/tfastdigital/pes2021-fullscreen-fix |
-| Releases | https://github.com/tfastdigital/pes2021-fullscreen-fix/releases |
-| Project page | https://tfastdigital.github.io/pes2021-fullscreen-fix/ |
-| Update feed | https://tfastdigital.github.io/pes2021-fullscreen-fix/version.json |
+| Purpose      | Address                                                            |
+| ------------ | ------------------------------------------------------------------ |
+| Repository   | https://github.com/tfastdigital/pes2021-fullscreen-fix             |
+| Releases     | https://github.com/tfastdigital/pes2021-fullscreen-fix/releases    |
+| Project page | https://tfastdigital.github.io/pes2021-fullscreen-fix/             |
+| Update feed  | https://tfastdigital.github.io/pes2021-fullscreen-fix/version.json |
 
 The feed address is compiled into the application. If you publish under a different owner or name,
 update `Brand.VersionFeed` and `Brand.ReleasesPage` in `src/gui/TfastRunnerGui.cs` before building,
@@ -57,15 +57,15 @@ otherwise the update check silently reports nothing.
 
 ## Finishing touches worth doing once
 
-| Setting | Where | Value |
-| --- | --- | --- |
-| Description and website | Settings → General | Already set by `publish.ps1`, edit if needed |
-| Topics | Settings → General | `pes2021`, `efootball`, `fullscreen`, `windows-11`, `dxgi`, `powershell`, `winforms` |
-| Discussions | Settings → General → Features | Optional, useful for troubleshooting threads |
-| Private vulnerability reporting | Settings → Code security | Enable so the link in `SECURITY.md` works |
-| Dependabot alerts | Settings → Code security | Enable |
-| Branch protection on `main` | Settings → Branches | Require the `build` check before merging |
-| Squash merge only | Settings → General → Pull requests | Keeps history readable |
+| Setting                         | Where                              | Value                                                                                |
+| ------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------ |
+| Description and website         | Settings → General                 | Already set by `publish.ps1`, edit if needed                                         |
+| Topics                          | Settings → General                 | `pes2021`, `efootball`, `fullscreen`, `windows-11`, `dxgi`, `powershell`, `winforms` |
+| Discussions                     | Settings → General → Features      | Optional, useful for troubleshooting threads                                         |
+| Private vulnerability reporting | Settings → Code security           | Enable so the link in `SECURITY.md` works                                            |
+| Dependabot alerts               | Settings → Code security           | Enable                                                                               |
+| Branch protection on `main`     | Settings → Branches                | Require the `build` check before merging                                             |
+| Squash merge only               | Settings → General → Pull requests | Keeps history readable                                                               |
 
 ## Shipping an update later
 

@@ -16,6 +16,8 @@ network calls except an optional update check.
 **[Download the latest release](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)** ·
 **[Project page](https://tfastdigital.github.io/pes2021-fullscreen-fix/)**
 
+![Interface](docs/assets/screenshot.png)
+
 ---
 
 ## The problem
