@@ -34,8 +34,8 @@ namespace TFastDigital
         public const string Version  = "1.1.0";
 
         // Static file served by GitHub Pages, updated with every release.
-        public const string VersionFeed = "https://tfastdigital.github.io/pes2021-fullscreen-fix/version.json";
-        public const string ReleasesPage = "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest";
+        public const string VersionFeed = "https://tfastdigital6.github.io/pes2021-fullscreen-fix/version.json";
+        public const string ReleasesPage = "https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest";
 
         // Neutral greys with a single accent colour.
         public static readonly Color Window = Color.FromArgb(24, 25, 29);

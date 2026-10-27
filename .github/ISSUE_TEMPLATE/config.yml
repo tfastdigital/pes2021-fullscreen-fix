@@ -1,10 +1,10 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/tfastdigital/pes2021-fullscreen-fix/security/advisories/new
+    url: https://github.com/tfastdigital6/pes2021-fullscreen-fix/security/advisories/new
     about: Report privately. Do not open a public issue for security problems.
   - name: Download the latest release
-    url: https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest
+    url: https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest
     about: Try the newest build before reporting a problem.
   - name: Chat on Telegram
     url: https://t.me/tfasthub

@@ -27,7 +27,7 @@ Requirements:
 - .NET SDK only if you want to use an editor with IntelliSense
 
 ```powershell
-git clone https://github.com/tfastdigital/pes2021-fullscreen-fix.git
+git clone https://github.com/tfastdigital6/pes2021-fullscreen-fix.git
 cd pes2021-fullscreen-fix
 powershell -ExecutionPolicy Bypass -File .\build\build-gui.ps1
 ```

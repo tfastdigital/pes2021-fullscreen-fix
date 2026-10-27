@@ -132,14 +132,15 @@ a:hover {
 
 
 .shot {
-  display: block;
-  width: 100%;
-  max-width: 720px;
-  height: auto;
-  margin: 32px 0 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    margin: 32px 0 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
+
 .hero h1 {
     font-size: 34px;
     line-height: 1.25;

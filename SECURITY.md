@@ -8,7 +8,7 @@
 | 1.0.x   | Yes       |
 | < 1.0   | No        |
 
-Always test against the [latest release](https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/latest)
+Always test against the [latest release](https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases/latest)
 before reporting.
 
 ## Reporting a vulnerability

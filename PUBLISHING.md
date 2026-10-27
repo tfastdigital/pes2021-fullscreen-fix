@@ -13,7 +13,7 @@ Tokens are never stored in this folder and never shared.
 powershell -ExecutionPolicy Bypass -File .\build\publish.ps1
 ```
 
-`publish.ps1` is safe to re-run. It creates `tfastdigital/pes2021-fullscreen-fix` only if it does
+`publish.ps1` is safe to re-run. It creates `tfastdigital6/pes2021-fullscreen-fix` only if it does
 not exist, sets `origin`, pushes `main`, enables GitHub Pages with the workflow build type, and
 pushes the version tag that triggers the release workflow. If Pages cannot be enabled through the
 API it says so and you can turn it on in Settings.
@@ -46,10 +46,10 @@ Watch the first run with:
 
 | Purpose      | Address                                                            |
 | ------------ | ------------------------------------------------------------------ |
-| Repository   | https://github.com/tfastdigital/pes2021-fullscreen-fix             |
-| Releases     | https://github.com/tfastdigital/pes2021-fullscreen-fix/releases    |
-| Project page | https://tfastdigital.github.io/pes2021-fullscreen-fix/             |
-| Update feed  | https://tfastdigital.github.io/pes2021-fullscreen-fix/version.json |
+| Repository   | https://github.com/tfastdigital6/pes2021-fullscreen-fix             |
+| Releases     | https://github.com/tfastdigital6/pes2021-fullscreen-fix/releases    |
+| Project page | https://tfastdigital6.github.io/pes2021-fullscreen-fix/             |
+| Update feed  | https://tfastdigital6.github.io/pes2021-fullscreen-fix/version.json |
 
 The feed address is compiled into the application. If you publish under a different owner or name,
 update `Brand.VersionFeed` and `Brand.ReleasesPage` in `src/gui/TfastRunnerGui.cs` before building,
