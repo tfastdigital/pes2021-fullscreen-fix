@@ -1,8 +1,8 @@
-{
-  "version": "1.1.0",
-  "date": "2026-10-27",
-  "url": "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v1.1.0",
-  "notes": "Focus protection and GPU verification fixes",
-  "minimumWindows": "10",
-  "sha256": "4B0E44DE449A75F6161AC8E99BE1790E270151D2BBD8CB1B370409E73F463E28"
+﻿{
+    "version":  "1.1.0",
+    "date":  "2026-10-27",
+    "url":  "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v1.1.0",
+    "notes":  "Focus protection and GPU verification fixes",
+    "minimumWindows":  "10",
+    "sha256":  "4B0E44DE449A75F6161AC8E99BE1790E270151D2BBD8CB1B370409E73F463E28"
 }

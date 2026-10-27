@@ -33,12 +33,12 @@ if (-not (Test-Path -LiteralPath $assets)) { New-Item -ItemType Directory -Path 
 Add-Type -AssemblyName System.Drawing
 
 # Palette, kept in step with docs/assets/site.css.
-$bg       = [System.Drawing.Color]::FromArgb(22, 23, 27)
-$panel    = [System.Drawing.Color]::FromArgb(31, 33, 38)
-$border   = [System.Drawing.Color]::FromArgb(51, 54, 63)
-$text     = [System.Drawing.Color]::FromArgb(230, 232, 236)
-$muted    = [System.Drawing.Color]::FromArgb(150, 155, 166)
-$accent   = [System.Drawing.Color]::FromArgb(45, 108, 223)
+$bg = [System.Drawing.Color]::FromArgb(22, 23, 27)
+$panel = [System.Drawing.Color]::FromArgb(31, 33, 38)
+$border = [System.Drawing.Color]::FromArgb(51, 54, 63)
+$text = [System.Drawing.Color]::FromArgb(230, 232, 236)
+$muted = [System.Drawing.Color]::FromArgb(150, 155, 166)
+$accent = [System.Drawing.Color]::FromArgb(45, 108, 223)
 $accentHi = [System.Drawing.Color]::FromArgb(110, 160, 255)
 
 function New-Canvas([int]$width, [int]$height) {
@@ -93,11 +93,11 @@ Draw-Mark $g (New-Object System.Drawing.RectangleF(48, 26, 44, 44))
 
 $fBrand = New-Object System.Drawing.Font('Segoe UI', 17, [System.Drawing.FontStyle]::Bold)
 $fTitle = New-Object System.Drawing.Font('Segoe UI', 38, [System.Drawing.FontStyle]::Bold)
-$fLead  = New-Object System.Drawing.Font('Segoe UI', 18)
+$fLead = New-Object System.Drawing.Font('Segoe UI', 18)
 $fSmall = New-Object System.Drawing.Font('Segoe UI', 16)
-$fPill  = New-Object System.Drawing.Font('Segoe UI', 14, [System.Drawing.FontStyle]::Bold)
+$fPill = New-Object System.Drawing.Font('Segoe UI', 14, [System.Drawing.FontStyle]::Bold)
 
-$inkBrush  = New-Object System.Drawing.SolidBrush($text)
+$inkBrush = New-Object System.Drawing.SolidBrush($text)
 $mutedBrush = New-Object System.Drawing.SolidBrush($muted)
 
 $g.DrawString('PES 2021 Fullscreen Fix', $fBrand, $inkBrush, 108, 34)

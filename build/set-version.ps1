@@ -65,6 +65,16 @@ if ($Notes) { $data.notes = $Notes }
 $data.url = "https://github.com/tfastdigital/pes2021-fullscreen-fix/releases/tag/v$Version"
 $data | ConvertTo-Json | Set-Content -LiteralPath $feed -Encoding utf8
 
+# ---- asset cache tokens in the site pages
+# Image and stylesheet URLs carry ?v=<version>. A browser that once cached a 404 for an
+# asset keeps serving it after the file is added, so the token must move with the version.
+foreach ($page in @((Join-Path $repoRoot 'docs\index.html'), (Join-Path $repoRoot 'docs\404.html'))) {
+    if (-not (Test-Path -LiteralPath $page)) { continue }
+    $html = Get-Content -LiteralPath $page -Raw
+    $html = [regex]::Replace($html, '(\?v=)\d+\.\d+\.\d+', "`${1}$Version")
+    Set-Content -LiteralPath $page -Value $html -NoNewline
+}
+
 # ---- verify
 $guiText = Get-Content -LiteralPath $gui -Raw
 $engineText = Get-Content -LiteralPath $engine -Raw
@@ -75,6 +85,7 @@ $checks = @(
     @{ Name = 'Brand.Version'; Ok = $guiText -match "Version\s*=\s*`"$([regex]::Escape($Version))`"" }
     @{ Name = 'engine header'; Ok = $engineText -match "(?m)^\s*Version:\s*$([regex]::Escape($Version))\s*$" }
     @{ Name = 'version.json'; Ok = $feedData.version -eq $Version }
+    @{ Name = 'site asset tokens'; Ok = ((Get-Content -LiteralPath (Join-Path $repoRoot 'docs\index.html') -Raw) -match "\?v=$([regex]::Escape($Version))") }
 )
 
 $failed = @($checks | Where-Object { -not $_.Ok })
