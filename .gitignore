@@ -6,7 +6,12 @@ build/*.ico
 # Local test artefacts
 test-*.ps1
 *.log
-*.png
+
+# Debug captures at the repository root only. Site images under docs/assets are
+# real assets and must be committed, so do not ignore *.png globally.
+/*.png
+/*.jpeg
+/*.jpg
 
 # Windows / Visual Studio
 .vs/
