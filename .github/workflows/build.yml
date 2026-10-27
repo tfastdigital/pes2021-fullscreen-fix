@@ -44,18 +44,25 @@ jobs:
           powershell -ExecutionPolicy Bypass -File .\src\PES2021-Fullscreen.ps1 -Action Gpu -GameDir $tmp
           if ($LASTEXITCODE -ne 0) { exit 1 }
 
-      - name: Compute checksum
+      - name: Stage release asset
         shell: pwsh
         run: |
-          $hash = (Get-FileHash 'build/PES 2021 TFast Fix.exe' -Algorithm SHA256).Hash
+          # Spaces in the original name are rewritten as dots by the uploader, which looks
+          # sloppy on the release page. Publish a conventional, URL-safe name instead.
+          $source = 'build/PES 2021 TFast Fix.exe'
+          $asset  = 'build/PES2021-TFast-Fix.exe'
+          Copy-Item -LiteralPath $source -Destination $asset -Force
+          $hash = (Get-FileHash -LiteralPath $asset -Algorithm SHA256).Hash
           "SHA256=$hash" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          Write-Host "SHA256 $hash"
+          "ASSET=$asset"  | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          Write-Host "asset  $asset"
+          Write-Host "sha256 $hash"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: pes2021-fullscreen-fix
-          path: build/PES 2021 TFast Fix.exe
+          path: build/PES2021-TFast-Fix.exe
           if-no-files-found: error
 
       - name: Publish release
@@ -65,7 +72,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
-          gh release create $tag 'build/PES 2021 TFast Fix.exe' `
+          gh release create $tag $env:ASSET `
             --title "PES 2021 Fullscreen Fix $tag" `
             --generate-notes `
             --notes "SHA256: $env:SHA256"
