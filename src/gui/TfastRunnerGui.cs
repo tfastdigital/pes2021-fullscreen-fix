@@ -31,7 +31,7 @@ namespace TFastDigital
         public const string WhatsApp = "https://whatsapp.com/channel/0029VaAYznPK5cDIXJa9nW1a";
         public const string TikTok = "https://www.tiktok.com/@tfasthub";
         public const string YouTube = "https://www.youtube.com/@TfastDigital";
-        public const string Version = "1.1.0";
+        public const string Version  = "1.1.0";
 
         // Static file served by GitHub Pages, updated with every release.
         public const string VersionFeed = "https://tfastdigital.github.io/pes2021-fullscreen-fix/version.json";

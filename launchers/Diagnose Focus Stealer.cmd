@@ -1,15 +1,20 @@
 @echo off
 setlocal
-title PES 2021 - find out what keeps stealing focus
-echo Watch this window while you play. It lists every program that takes the
-echo foreground and how many times, so the culprit can be identified.
-echo.
-echo Close the game first if it is already running with the fix - the fix
-echo already prevents most stealing, so you would not see anything.
+set "ENGINE=%~dp0..\src\PES2021-Fullscreen.ps1"
+
+if not exist "%ENGINE%" (
+    echo Engine not found: %ENGINE%
+    pause
+    exit /b 1
+)
+
+title PES 2021 Fullscreen Fix - focus diagnostics
+echo Watching the foreground window to find any process that takes focus.
+echo Leave this running while you play, then read the summary.
 echo.
 set /p SECS=How many seconds to watch [120]: 
 if "%SECS%"=="" set SECS=120
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0PES2021-Fullscreen.ps1" -Action Diagnose -DiagnoseSeconds %SECS%
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ENGINE%" -Action Diagnose -DiagnoseSeconds %SECS%
 echo.
 pause
 endlocal
